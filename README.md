@@ -34,7 +34,7 @@ Everyone on your team should add their name along with a link to their GitHub
 your repo access and to practice PR'ing with your team *before* you start
 coding!
 
-- Teammate name #1: [GitHub](https://github.com/ouassimaelyakoubi) / [LinkedIn](https://linkedin.com/in/ouassima-elyakoubi)
+- Ouassima EL YAKOUBI #1: [GitHub](https://github.com/ouassimaelyakoubi) / [LinkedIn](https://linkedin.com/in/ouassima-elyakoubi)
 - Emily Morgan: [GitHub](https://github.com/EMorganLND) / [LinkedIn](https://linkedin.com/in/agilem)
 
    ...
