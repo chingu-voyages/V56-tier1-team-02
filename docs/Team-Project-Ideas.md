@@ -10,9 +10,9 @@ sentences.
 Each team member should Place an 'X' under their name to vote for the ideas 
 you like the best.
 
-| Project Idea | Description | teammate name | teammate name | teammate name | teammate name | teammate name | teammate name |
+| Project Idea | Description | Emily | Ouassima | Ebhamen | Symphorien | Vidar | teammate name |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| First idea | Keep the design simple, clean layout and basic colour scheme | Emily | | | | | |
-| Second idea | Only do the Home Screen, Patient Info and Patient Status | Emily | | | | | |
+| First idea | Keep the design simple, clean layout and basic colour scheme | X | | | | | |
+| Second idea | Only do the Home Screen, Patient Info and Patient Status | X | | | | | |
 | ... | Description | | | | | | |
 | Last idea | Description | | | | | | |
