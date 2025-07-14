@@ -14,5 +14,5 @@ you like the best.
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | First idea | Keep the design simple, clean layout and basic colour scheme | X | | | | | |
 | Second idea | Only do the Home Screen, Patient Info and Patient Status | X | | | | | |
-| ... | Description | | | | | | |
-| Last idea | Description | | | | | | |
+| Third idea  | design different pages of the project | | X | | | | |
+| Fourth idea | Since users are in a hospital environment the ui should feel clean and claming using pastel colors | | X | | | | |
