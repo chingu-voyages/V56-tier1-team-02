@@ -14,7 +14,9 @@ function App() {
 
   return (
     <Router>
+
       <div className="flex flex-col h-screen justify-between">
+
       <Header/>
           <main>
             <Routes>
@@ -26,8 +28,10 @@ function App() {
                   {/* Add more routes as needed */}
             </Routes>
           </main>
+
       <Footer/> 
       </div>     
+
     </Router>
   )
 }
