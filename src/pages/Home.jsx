@@ -13,7 +13,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen m-2 lg:m-0" >
+    <div className="flex flex-col items-center justify-center m-2 lg:m-0" >
       <h1 className="text-2xl md:text-4xl text-center font-bold mb-8 text-[#0069AB] leading-relaxed lg:w-[60%]">Track the process of your loved one’s surgery in real-time</h1>
         <div className="flex items-center justify-center self-center flex-col gap-4  md:w-95 xl:w-105 xl:py-12 px-6 rounded-lg bg-white shadow-xl py-10 w-[90%]">
           <button onClick={handleLogin} className="border-2 bg-[#0069AB] border-[#045679] font-bold text-white px-10 py-2 rounded-lg text-md md:text-lg xl:text-xl">Log In</button>
