@@ -25,6 +25,7 @@ const Home = () => {
           <button onClick={handleGuest} className="border-2 text-[#367B99] border-[#367B99] font-bold bg-white rounded-lg px-8 py-2 text-md md:text-lg xl:text-xl">Continue as Guest</button>
         </div>
     </div>
+    
   );
 };
 export default Home;
