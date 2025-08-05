@@ -9,6 +9,10 @@ import StatusUpdate from './pages/StatusUpdate'
 import Login from './pages/Login'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import ProtectedRoute from "./components/ProtectedRoute";
+import NotFound from "./pages/NotFound";
+
+
 
 function App() {
 
@@ -22,10 +26,20 @@ function App() {
             <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/patient-status" element={<PatientStatus />} />
-                  <Route path="/info" element={<PatientInfo />} />
-                  <Route path="/update" element={<StatusUpdate />} />
+                  {/* Accessible to admin */}
+                  <Route path="/info" element={
+                    <ProtectedRoute allowedRoles={"admin"}>
+                        <PatientInfo />
+                    </ProtectedRoute>} />
+                  {/* Accessible to admin and surgicalMembers */}
+                  <Route path="/update" element={
+                    <ProtectedRoute allowedRoles={["admin", "surgical"]}>
+                        <StatusUpdate />
+                    </ProtectedRoute>} />
                   <Route path="/login" element={<Login />} />
                   {/* Add more routes as needed */}
+                   {/* Catch all */}
+                  <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
 

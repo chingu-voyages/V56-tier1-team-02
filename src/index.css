@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   background-image: url("./assets/background-ghibli-style.png");
-  background-size: cover;
+  background-size: object-cover;
   background-repeat: no-repeat;
+  background-position: center;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
