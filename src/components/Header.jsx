@@ -21,14 +21,19 @@ function Header() {
   });
 
   return (
-    <header className="flex flex-col items-center justify-center text-[#0069AB]">
-      <div className="w-full flex items-center justify-between md:px-6 px-1 pt-2">
-        <div className="flex items-center gap-1">
-          <img src={logo} alt="Logo" className="w-16 h-16 md:w-20 md:h-20" />
-          <h1 className="text-xl md:text-2xl font-bold">Surgery Status Board</h1>
-        </div>
-        <time className="md:text-lg text-md">{date}</time>
-      </div>
+
+        <header class="bg-white/50 border-b border-gray-100 py-4 sticky top-0 z-40 backdrop-blur-sm text-[#0069AB]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <img src={logo} alt="Logo" className="w-16 h-16 md:w-20 md:h-20" />
+                    <h1 className="text-xl md:text-2xl font-bold">Surgery Status Board</h1>
+                </div>
+                <div class="text-sm font-medium">
+                    <time className="md:text-lg text-md">{date}</time>
+                </div>
+            </div>
+        
 
       
       {/* Show navbar links only after role is selected */}
@@ -57,6 +62,7 @@ function Header() {
           )}
         </nav>
       )}
+      </div>
     </header>
   );
 }
