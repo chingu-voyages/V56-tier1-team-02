@@ -2,7 +2,7 @@
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from './UserContext';
-
+import logo from '../assets/logo-ssb.png'; 
 function Header() {
   const { role } = useContext(UserContext);
 
@@ -24,7 +24,7 @@ function Header() {
     <header className="flex flex-col items-center justify-center text-[#0069AB]">
       <div className="w-full flex items-center justify-between md:px-6 px-1 pt-2">
         <div className="flex items-center gap-1">
-          <img src="/src/assets/logo-ssb.png" alt="Logo" className="w-16 h-16 md:w-20 md:h-20" />
+          <img src={logo} alt="Logo" className="w-16 h-16 md:w-20 md:h-20" />
           <h1 className="text-xl md:text-2xl font-bold">Surgery Status Board</h1>
         </div>
         <time className="md:text-lg text-md">{date}</time>
