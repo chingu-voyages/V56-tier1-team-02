@@ -5,13 +5,15 @@
   line-height: 1.5;
   font-weight: 400;
   background-image: url("./assets/background-ghibli-style.png");
-  background-size: contain;
+  background-size: cover;
+  background-attachment: fixed;
   background-repeat: no-repeat;
+  background-position: center;
 
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
 
