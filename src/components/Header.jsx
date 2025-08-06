@@ -3,7 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from './UserContext';
 import logo from '../assets/logo-ssb.png'; 
+import { useState, useEffect } from 'react';
 function Header() {
+  
   const { role } = useContext(UserContext);
 
 
@@ -22,48 +24,49 @@ function Header() {
 
   return (
 
-        <header class="bg-white/50 border-b border-gray-100 py-4 sticky top-0 z-40 backdrop-blur-sm text-[#0069AB]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="flex items-center gap-3">
+      <header className="bg-white/50 border-b border-gray-100 py-4 sticky top-0 z-40 backdrop-blur-sm text-[#0069AB]">
+        <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="flex items-center gap-3">
                     <img src={logo} alt="Logo" className="w-16 h-16 md:w-20 md:h-20" />
                     <h1 className="text-xl md:text-2xl font-bold">Surgery Status Board</h1>
                 </div>
-                <div class="text-sm font-medium">
+                <div className="text-sm font-medium">
                     <time className="md:text-lg text-md">{date}</time>
                 </div>
             </div>
         
 
       
-      {/* Show navbar links only after role is selected */}
-      {role && (
-        <nav className="flex items-center justify-center text-lg rounded-xl bg-white/50 mt-2">
-          {role === 'admin' && (
-            <>
-              <NavLink to="/" className={(props) => linkClasses(props, 'rounded-l-xl')}>Home</NavLink>
-              <NavLink to="/info" className={linkClasses}>Patient Info</NavLink>
-              <NavLink to="/update" className={linkClasses}>Status Update</NavLink>
-              <NavLink to="/patient-status" className={(props) => linkClasses(props, 'rounded-r-xl')}>Patient Status</NavLink>
-            </>
-          )}
-          {role === 'surgical' && (
-            <>
-              <NavLink to="/" className={(props) => linkClasses(props, 'rounded-l-xl')}>Home</NavLink>
-              <NavLink to="/update" className={linkClasses}>Status Update</NavLink>
-              <NavLink to="/patient-status" className={(props) => linkClasses(props, 'rounded-r-xl')}>Patient Status</NavLink>
-            </>
-          )}
-          {role === 'guest' && (
-            <>
-              <NavLink to="/" className={(props) => linkClasses(props, 'rounded-l-xl')}>Home</NavLink>
-              <NavLink to="/patient-status" className={(props) => linkClasses(props, 'rounded-r-xl')}>Patient Status</NavLink>
-            </>
-          )}
-        </nav>
-      )}
+            {/* Show navbar links only after role is selected */}
+            {role && (
+              <nav className="flex items-center justify-center text-lg rounded-xl bg-white/50 mt-2">
+                {role === 'admin' && (
+                  <>
+                    <NavLink to="/" className={(props) => linkClasses(props, 'rounded-l-xl')}>Home</NavLink>
+                    <NavLink to="/info" className={linkClasses}>Patient Info</NavLink>
+                    <NavLink to="/update" className={linkClasses}>Status Update</NavLink>
+                    <NavLink to="/patient-status" className={(props) => linkClasses(props, 'rounded-r-xl')}>Patient Status</NavLink>
+                  </>
+                )}
+                {role === 'surgical' && (
+                  <>
+                    <NavLink to="/" className={(props) => linkClasses(props, 'rounded-l-xl')}>Home</NavLink>
+                    <NavLink to="/update" className={linkClasses}>Status Update</NavLink>
+                    <NavLink to="/patient-status" className={(props) => linkClasses(props, 'rounded-r-xl')}>Patient Status</NavLink>
+                  </>
+                )}
+                {role === 'guest' && (
+                  <>
+                    <NavLink to="/" className={(props) => linkClasses(props, 'rounded-l-xl')}>Home</NavLink>
+                    <NavLink to="/patient-status" className={(props) => linkClasses(props, 'rounded-r-xl')}>Patient Status</NavLink>
+                  </>
+                )}
+              </nav>
+            )}
       </div>
     </header>
+    
   );
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { Routes, Route, BrowserRouter as Router} from 'react-router-dom'
@@ -15,16 +15,16 @@ import NotFound from "./pages/NotFound";
 
 
 function App() {
-
+   
   return (
     <Router>
 
-      <div className="flex flex-col h-screen justify-between">
-
+     
       <Header/>
           <main>
             <Routes>
                   <Route path="/" element={<Home />} />
+                  {/* Accessible to all roles */}
                   <Route path="/patient-status" element={<PatientStatus />} />
                   {/* Accessible to admin */}
                   <Route path="/info" element={
@@ -44,7 +44,6 @@ function App() {
           </main>
 
       <Footer/> 
-      </div>     
 
     </Router>
   )
