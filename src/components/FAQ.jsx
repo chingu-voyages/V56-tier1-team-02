@@ -42,7 +42,7 @@ function FAQ() {
     }
   ];
   return (
-        <section className="py-20 bg-blue-50" id='FAQ'>
+        <section className="py-20 bg-blue-50" id='FAQ '>
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-[#0069AB] mb-4">Frequently Asked Questions</h2>
