@@ -2,7 +2,7 @@ import React from 'react'
 
 function PatientInfo() {
   return (
-    <div>PatientInfo</div>
+      <h2>Welcome Admin – Patient Information</h2>
   )
 }
 
