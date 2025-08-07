@@ -7,7 +7,7 @@ import HowItWorks from '../components/HowItWorks';
 import FAQ from '../components/FAQ';
 
 const Home = () => {
-   
+
   return (
     <div>
       <Hero />

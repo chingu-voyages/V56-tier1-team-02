@@ -2,7 +2,7 @@ import React from 'react'
 
 function StatusUpdate() {
   return (
-    <div>StatusUpdate</div>
+    <h2>Welcome Surgical Member – Patient Status Update</h2>
   )
 }
 

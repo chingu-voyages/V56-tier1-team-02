@@ -2,9 +2,12 @@ import React from 'react'
 import { FaGithub } from "react-icons/fa6";
 import { FaHeartbeat, FaShieldAlt,  } from "react-icons/fa"
 import logo from '../assets/logo-ssb.png'; 
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Footer() {
+  const navigate = useNavigate();
   return (
     <footer className="bg-gradient-to-b from-white/80 to-gray-50/90 border-t border-gray-200 py-10">
       <div className="max-w-6xl mx-auto px-6">
