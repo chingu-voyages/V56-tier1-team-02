@@ -13,7 +13,7 @@ function Header() {
     `block transition-all text-sm leading-6 tracking-wide w-fit ${
       isActive
         ? 'border-b-2 border-[#0069AB] font-bold'
-        : 'text-[#0069AB]  hover:text-[#FFE299]'
+        : 'text-[#0069AB]  hover:font-bold'
     }`;
 
   const date = new Date().toLocaleDateString('en-US', {
