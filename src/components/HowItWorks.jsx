@@ -20,10 +20,10 @@ function HowItWorks() {
     }
   ];
   return (
-     <section className="py-20 bg-blue-100" id='HowItWorks'>
+     <section className="py-20 bg-gradient-to-b from-white/80 to-gray-50/90" id='HowItWorks'>
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-[#0069AB] mb-4">How It Works</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#0069AB] mb-4">How It Works</h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 The system adapts to each role — from hospital staff managing patient flow to families staying informed.
               </p>
@@ -33,10 +33,10 @@ function HowItWorks() {
               {steps.map((step, index) => (
                 <article key={step.number} className="text-center">
                   <div className="relative mb-8">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-300 to-blue-700 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto shadow-lg">
+                    <div className="w-16 h-16 bg-gradient-to-br from-amber-200 to-amber-500 rounded-full flex items-center justify-center text-black text-2xl font-bold mx-auto shadow-lg">
                       {step.number}
                     </div>
-                    <div className="absolute inset-0 w-16 h-16 bg-gradient-to-br from-blue-300 to-blue-700 rounded-full mx-auto animate-pulse opacity-75"></div>
+                    <div className="absolute inset-0 w-16 h-16 bg-gradient-to-br from-gray-200 to-[#FFE299] rounded-full mx-auto animate-pulse opacity-75"></div>
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">{step.title}</h3>
                   <p className="text-gray-600 leading-relaxed max-w-sm mx-auto">{step.description}</p>

@@ -13,9 +13,9 @@ function Footer() {
         <div className="flex flex-col items-center justify-center text-center space-y-6">
           
           {/* Header with Medical Icon */}
-          <div className="flex items-center md:gap-2 gap-0">
+          <div className="flex items-center md:gap-2 gap-0 cursor-pointer" onClick={()=>navigate("/")}>
             <img src={logo} alt="Logo" className="w-15 h-14 text-center" />
-            <h3 className="font-semibold text-[#0069AB] text-xl m-0 p-0">Surgery Status Board</h3>
+            <h3 className="font-semibold text-[#0069AB] text-lg m-0 p-0">Surgery Status Board</h3>
           </div>
           
           {/* Development Team Section */}

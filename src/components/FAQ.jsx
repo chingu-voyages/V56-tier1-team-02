@@ -42,10 +42,10 @@ function FAQ() {
     }
   ];
   return (
-        <section className="py-20 bg-blue-50" id='FAQ '>
+        <section className="py-20 bg-gradient-to-b from-white/80 to-gray-50/90">
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-[#0069AB] mb-4">Frequently Asked Questions</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#0069AB] mb-4">Frequently Asked Questions</h2>
             </div>
             
             <div className="space-y-4">
