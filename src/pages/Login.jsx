@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { credentials } from '../data';
 import {
@@ -8,40 +8,57 @@ import {
   LuCircleCheck,
   LuLock,
   LuMail,
-  LuShield,
-  LuUsers
 } from 'react-icons/lu';
 import { UserContext } from '../components/UserContext';
-import { useContext } from 'react';
 
 function Login() {
-    const { setRole } = useContext(UserContext);
-  
+  const { setRole } = useContext(UserContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const navigate = useNavigate();
 
   const handleGuestAccess = () => {
-        setRole('');
-
+    setRole('');
     navigate('/patient-status');
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+    setEmailError('');
+    setPasswordError('');
+    setMessage('');
+
+    if (!email) {
+      setEmailError('Please enter your email address.');
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError('Please enter a valid email address.');
+      isValid = false;
+    }
+
+    if (!password) {
+      setPasswordError('Please enter your password.');
+      isValid = false;
+    }
+
+    return isValid;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      setMessage('Please fill in all fields');
-      setMessageType('error');
+    if (!validateForm()) {
       return;
     }
 
-    setMessage('');
     setIsLoading(true);
 
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -51,8 +68,7 @@ function Login() {
     );
 
     if (user) {
-        setRole(user.role);
-
+      setRole(user.role);
       setMessage(`Welcome back, ${user.name}! Redirecting...`);
       setMessageType('success');
       
@@ -62,11 +78,12 @@ function Login() {
         name: user.name,
         loginTime: new Date().toISOString()
       }));
-        if (user.role === 'admin') {
-          navigate('/info');
-        } else if (user.role === 'surgical') {
-          navigate('/update');
-        }
+
+      if (user.role === 'admin') {
+        navigate('/info');
+      } else if (user.role === 'surgical') {
+        navigate('/update');
+      }
       
     } else {
       setMessage('Invalid email or password');
@@ -106,7 +123,7 @@ function Login() {
         )}
 
         {/* Login Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6" noValidate>
           {/* Email */}
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -120,11 +137,13 @@ function Login() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0069AB] focus:border-transparent outline-none transition-all"
+                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:border-transparent outline-none transition-all ${
+                  emailError ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-[#0069AB]'
+                }`}
                 placeholder="Enter your email"
-                required
               />
             </div>
+            {emailError && <p className="text-red-500 text-xs mt-1">{emailError}</p>}
           </div>
 
           {/* Password */}
@@ -140,9 +159,10 @@ function Login() {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0069AB] focus:border-transparent outline-none transition-all"
+                className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:border-transparent outline-none transition-all ${
+                  passwordError ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-[#0069AB]'
+                }`}
                 placeholder="Enter your password"
-                required
               />
               <button
                 type="button"
@@ -153,6 +173,7 @@ function Login() {
                 {showPassword ? <LuEyeOff className="w-5 h-5" /> : <LuEye className="w-5 h-5" />}
               </button>
             </div>
+            {passwordError && <p className="text-red-500 text-xs mt-1">{passwordError}</p>}
           </div>
 
           {/* Submit */}
