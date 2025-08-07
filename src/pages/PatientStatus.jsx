@@ -4,7 +4,7 @@ function PatientStatus() {
   return (
     <div className="flex flex-col items-center justify-center">
       <h2>Patient Status</h2>
-      <button
+      {/* <button
           onClick={() => {
             localStorage.removeItem("role");
             window.location.href = "/";
@@ -12,7 +12,7 @@ function PatientStatus() {
           className="ml-4 px-4 py-2 text-black "
 >
         ← Back Home
-      </button>
+      </button> */}
     </div>
 
   )

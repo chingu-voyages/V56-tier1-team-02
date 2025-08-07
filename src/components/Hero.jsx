@@ -1,17 +1,11 @@
 import React from 'react'
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from 'react';
-import { UserContext } from '../components/UserContext';
-import { useState, useEffect } from 'react';
 
 function Hero() {
   
-    const { setRole } = useContext(UserContext);
       const navigate = useNavigate();
     
       const handleGuest = () => {
-        localStorage.setItem('role', 'guest');
-        setRole('guest');
         navigate('/patient-status');
       };
     

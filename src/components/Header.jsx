@@ -42,7 +42,7 @@ function Header() {
           <nav className="hidden lg:flex gap-10">
             <NavLink to="/" className={linkClasses}>Home</NavLink>
             <NavLink to="/info" className={linkClasses}>Patient Information</NavLink>
-            <NavLink to="/update" className={linkClasses}>Status Update</NavLink>
+            <NavLink to="/update" className={linkClasses}>Patient Status Update</NavLink>
             <NavLink to="/patient-status" className={linkClasses}>Patient Status</NavLink>
           </nav>
 
@@ -82,10 +82,10 @@ function Header() {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <nav className="lg:hidden mt-4 flex flex-col gap-6 items-center">
+          <nav className="lg:hidden mt-4 flex flex-col gap-6 items-center pt-4">
             <NavLink to="/" className={linkClasses} onClick={() => setMenuOpen(false)}>Home</NavLink>
             <NavLink to="/info" className={linkClasses} onClick={() => setMenuOpen(false)}>Patient Information</NavLink>
-            <NavLink to="/update" className={linkClasses} onClick={() => setMenuOpen(false)}>Status Update</NavLink>
+            <NavLink to="/update" className={linkClasses} onClick={() => setMenuOpen(false)}>Patient Status Update</NavLink>
             <NavLink to="/patient-status" className={linkClasses} onClick={() => setMenuOpen(false)}>Patient Status</NavLink>
           </nav>
         )}
