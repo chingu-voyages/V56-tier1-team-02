@@ -28,6 +28,10 @@
   --color-border: #9ec2c4;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .card {
   border: 2px solid var(--color-card-border);
   width: 350px;
@@ -41,11 +45,6 @@
   border: 2px solid var(--color-border);
 }
 
-.search-input {
-  border: 2px solid #d9d9d9;
-  background: #d9d9d9;
-}
-
 .patient-btn {
   padding: 5px 10px;
   background: var(--color-main);
@@ -57,10 +56,26 @@
   background: var(--color-complete);
 }
 
-input {
+@media (max-width: 40rem) {
+  .patient-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.add-input input,
+.search-input input {
   background: #f5f3e0;
   border: 2px solid var(--color-border);
   border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.search-patient {
+  border: 2px solid #d9d9d9 !important;
+  background: #d9d9d9 !important;
 }
 
 input:focus {
