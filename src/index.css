@@ -14,10 +14,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+
+  --color-main: #367b99;
+  --color-in-progress: #90c8ac;
+  --color-checked-in: #f3dba1;
+  --color-recovery: #a4b4d9;
+  --color-closing: #a9cba2;
+  --color-complete: #cccccc;
+  --color-pre-procedure: #c9d8b6;
+  --color-card-border: #f3e2b0;
 }
 
-
-
+.card {
+  border: 2px solid var(--color-card-border);
+  width: 350px;
+  height: 200px;
+}
 
 @keyframes fadeInUp {
   from {
@@ -27,5 +39,12 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 80rem) {
+  .card {
+    width: 300px;
+    height: 180px;
   }
 }
