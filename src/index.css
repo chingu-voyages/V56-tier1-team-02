@@ -23,12 +23,48 @@
   --color-complete: #cccccc;
   --color-pre-procedure: #c9d8b6;
   --color-card-border: #f3e2b0;
+
+  /* Form Colors */
+  --color-border: #9ec2c4;
 }
 
 .card {
   border: 2px solid var(--color-card-border);
   width: 350px;
   height: 200px;
+}
+
+/* Patient Information */
+.add-patient-form,
+.search-patient-form {
+  border-radius: 10px;
+  border: 2px solid var(--color-border);
+}
+
+.search-input {
+  border: 2px solid #d9d9d9;
+  background: #d9d9d9;
+}
+
+.patient-btn {
+  padding: 5px 10px;
+  background: var(--color-main);
+  border-radius: 8px;
+  color: #fff;
+}
+
+.patient-btn--secondary {
+  background: var(--color-complete);
+}
+
+input {
+  background: #f5f3e0;
+  border: 2px solid var(--color-border);
+  border-radius: 5px;
+}
+
+input:focus {
+  outline: none;
 }
 
 @keyframes fadeInUp {
