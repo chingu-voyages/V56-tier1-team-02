@@ -383,7 +383,7 @@ const PatientInfoSearchForm = ({ onHideSearchPatient }) => {
           <div className="flex flex-col items-center justify-center gap-8">
             <Card patient={singlePatient} />
             <button
-              className="cursor-pointer bg-[var(--color-main)] text-white p-2 rounded-[8px]"
+              className="cursor-pointer bg-[var(--color-main)] font-semibold text-[14px] text-white p-2 rounded-[8px]"
               onClick={() => setSinglePatient(null)}
             >
               Search Again
@@ -401,7 +401,7 @@ const Button = ({ children, secondary, onClick, ...props }) => {
     : "patient-btn";
   return (
     <button
-      className={`text-[14px] cursor-pointer ${btnClass}`}
+      className={`text-[14px] cursor-pointer font-semibold ${btnClass}`}
       {...props}
       onClick={onClick}
     >

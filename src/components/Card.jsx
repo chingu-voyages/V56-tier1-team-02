@@ -36,8 +36,10 @@ export function Card({ patient }) {
           <span className="text-[14px] max-md:text-[16px] max-sm:text-[12px] font-semibold text-[var(--color-main)]">
             Status:
           </span>
-          <span className="">
-            <span className={`px-2 py-1 rounded ${statusClass}`}>
+          <span>
+            <span
+              className={`px-2 py-1 text-[14px] max-md:text-[16px] max-sm:text-[12px] font-semibold rounded ${statusClass}`}
+            >
               {patient.status}
             </span>
           </span>
