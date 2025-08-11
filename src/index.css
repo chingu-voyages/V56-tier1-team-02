@@ -99,3 +99,7 @@ input:focus {
     height: 180px;
   }
 }
+
+.error-msg {
+  border: 1px solid red !important;
+}
