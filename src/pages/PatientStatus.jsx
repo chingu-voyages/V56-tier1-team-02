@@ -1,35 +1,3 @@
-const PatientInfo = [
-  {
-    patientNumber: "A4B7Q9",
-    status: "In-Progress",
-  },
-
-  {
-    patientNumber: "A4B7Q9",
-    status: "Checked-In",
-  },
-
-  {
-    patientNumber: "A4B7Q9",
-    status: "Recovery",
-  },
-
-  {
-    patientNumber: "A4B7Q9",
-    status: "Closing",
-  },
-
-  {
-    patientNumber: "A4B7Q9",
-    status: "Complete",
-  },
-
-  {
-    patientNumber: "A4B7Q9",
-    status: "Pre-Procedure",
-  },
-];
-
 import React from "react";
 import { usePatients } from "../context/PatientsContext";
 import { Card } from "../components/Card";
