@@ -9,12 +9,12 @@ export const credentials = [
     email: 'surgeon1@hospital.com',
     password: 'surgery123',
     role: 'surgical',
-    name: 'Dr. Josh Johnson',
+    name: 'Dr. Josh',
   },
   {
     email: 'surgeon@hospital.com',
       password: 'surgery123',
       role: 'surgical',
-      name: 'Dr. Sarah Johnson'
+      name: 'Dr. Sarah'
   },
 ];
