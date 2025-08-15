@@ -1,413 +1,329 @@
-import React, { useState } from "react";
-import { usePatients } from "../context/PatientsContext";
-import { Card } from "../components/Card";
+import React, { useState, useContext } from "react";
+import { usePatients } from "../context/PatientsContext"; // adjust the path
+import statuses from '../assets/status.json';
 
-const PatientInfo = () => {
-  const [hidePatientBtn, setHidePatientBtn] = useState(true);
-  const [showAddPatient, setShowAddPatient] = useState(false);
-  const [showSearchPatient, setShowSearchPatient] = useState(false);
+function PatientInfo() {
+  const { patients, setPatients } = usePatients();
+  const defaultStatus = statuses.find(s => s.id === 'checked-in');
 
-  const { patients, setPatients } = usePatients([]);
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    streetAddress: "",
+    city: "",
+    state: "",
+    country: "",
+    phoneNumber: "",
+    contactEmail: "",
+    status: defaultStatus.label
+  });
+  const [editingId, setEditingId] = useState(null);
+  const [errors, setErrors] = useState({});
 
-  const handleNewPatients = (patient) => {
-    const newPatients = [...patients, patient];
-    setPatients(newPatients);
-    localStorage.setItem("patients", JSON.stringify(newPatients));
-
-    setShowAddPatient(!showAddPatient);
-    setHidePatientBtn(!hidePatientBtn);
+  const generatePatientNumber = () => {
+    return Math.random().toString(36).substring(2, 8).toUpperCase();
   };
 
-  // Function Open Add Patient Form
-  const handleShowAddPatient = () => {
-    setShowAddPatient(!showAddPatient);
-
-    setHidePatientBtn(!hidePatientBtn);
+  const validate = () => {
+    let tempErrors = {};
+    if (!form.firstName) tempErrors.firstName = "First name is required.";
+    if (!form.lastName) tempErrors.lastName = "Last name is required.";
+    if (!form.streetAddress) tempErrors.streetAddress = "Street address is required.";
+    if (!form.city) tempErrors.city = "City is required.";
+    if (!form.state) tempErrors.state = "State is required.";
+    if (!form.country) tempErrors.country = "Country is required.";
+    if (!form.phoneNumber) {
+      tempErrors.phoneNumber = "Phone number is required.";
+    } else if (!/^[0-9]{10}$/.test(form.phoneNumber)) {
+      tempErrors.phoneNumber = "Phone number is not valid.";
+    }
+    if (!form.contactEmail) {
+      tempErrors.contactEmail = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(form.contactEmail)) {
+      tempErrors.contactEmail = "Email address is invalid.";
+    }
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
   };
 
-  // Function Hide Add Patient Form
-  const handleHideAddPatient = () => {
-    setShowAddPatient(!showAddPatient);
-
-    setHidePatientBtn(true);
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    if (errors[e.target.name]) {
+      setErrors({ ...errors, [e.target.name]: null });
+    }
   };
 
-  // Function to Show Search Patient Form
-  const handleShowSearchPatient = () => {
-    setShowSearchPatient(!showSearchPatient);
-
-    setHidePatientBtn(!hidePatientBtn);
-  };
-
-  // Function to Hide Search Patient Form
-  const handleHideSearchPatient = () => {
-    setShowSearchPatient(!showSearchPatient);
-
-    setHidePatientBtn(!hidePatientBtn);
-  };
-
-  return (
-    <div className="px-6 py-10 flex flex-col justify-center patient-info">
-      {hidePatientBtn && (
-        <PatientInfoBtn
-          onShowAddPatient={handleShowAddPatient}
-          onShowSearchPatient={handleShowSearchPatient}
-        />
-      )}
-
-      <div>
-        {showAddPatient && (
-          <PatientInfoAddForm
-            onHideAddPatient={handleHideAddPatient}
-            onNewPatient={handleNewPatients}
-          />
-        )}
-        {showSearchPatient && (
-          <PatientInfoSearchForm
-            onHideSearchPatient={handleHideSearchPatient}
-          />
-        )}
-      </div>
-    </div>
-  );
-};
-
-const PatientInfoBtn = ({ onShowAddPatient, onShowSearchPatient }) => {
-  return (
-    <div className="flex items-center max-sm:flex-col justify-center gap-4">
-      <Button onClick={onShowAddPatient}>Add New Patient</Button>
-
-      <Button secondary onClick={onShowSearchPatient}>
-        Search Existing Patient
-      </Button>
-    </div>
-  );
-};
-
-const PatientInfoAddForm = ({ onHideAddPatient, onNewPatient }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [address, setAddress] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [number, setNumber] = useState("");
-  const [email, setEmail] = useState("");
-
-  const generatePatientId = () => {
-    const letters = "CF";
-    const numbers = Math.floor(Math.random() * 10000)
-      .toString()
-      .padStart(4, "0");
-    return letters + numbers; // Returns: CF8902, CF1234, etc.
-  };
-
-  console.log(generatePatientId);
-
-  const handleNewPatient = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validate()) return;
 
-    if (
-      !firstName ||
-      !lastName ||
-      !address ||
-      !state ||
-      !city ||
-      !country ||
-      !number ||
-      !email
-    )
-      return;
-
-    const newPatient = {
-      firstName,
-      lastName,
-      address,
-      state,
-      city,
-      country,
-      number,
-      email,
-      status: "In-Progress",
-      id: generatePatientId(),
-    };
-
-    onNewPatient(newPatient);
-
-    setFirstName("");
-    setLastName("");
-    setAddress("");
-    setState("");
-    setCity("");
-    setCountry("");
-    setNumber("");
-    setEmail("");
-  };
-
-  return (
-    <form
-      className="bg-white w-[500px] max-sm:w-[290px] px-6 py-4 m-auto flex flex-col items-center max-sm:items-stretch gap-6 add-patient-form"
-      onSubmit={handleNewPatient}
-    >
-      <h4 className="text-[14px] text-[var(--color-main)] font-medium">
-        No patients have been added it yet. Use the form below to get started
-      </h4>
-
-      <div className="flex flex-col gap-2.5">
-        <div className="grid grid-cols-2 gap-x-6 max-sm:grid-cols-1">
-          <div className="flex flex-col gap-1 add-input">
-            <label
-              htmlFor="first-name"
-              className="text-[var(--color-main)] text-[12px] font-medium"
-            >
-              First Name
-            </label>
-            <input
-              id="first-name"
-              type="text"
-              className="px-3 text-[14px] font-semibold"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1 add-input">
-            <label
-              htmlFor="last-name"
-              className="text-[var(--color-main)] text-[12px] font-medium"
-            >
-              Last Name
-            </label>
-            <input
-              id="last-name"
-              type="text"
-              className="px-3 text-[14px] font-semibold"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-1 add-input">
-          <label
-            htmlFor="address"
-            className="text-[var(--color-main)] text-[12px] font-medium"
-          >
-            Street Address
-          </label>
-          <input
-            id="address"
-            type="text"
-            className="px-3 text-[14px] font-semibold"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-x-6 gap-y-2.5 max-sm:grid-cols-1">
-          <div className="flex flex-col gap-1 add-input">
-            <label
-              htmlFor="state"
-              className="text-[var(--color-main)] text-[12px] font-medium"
-            >
-              State
-            </label>
-            <input
-              id="state"
-              type="text"
-              className="px-3 text-[14px] font-semibold"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1 add-input">
-            <label
-              htmlFor="city"
-              className="text-[var(--color-main)] text-[12px] font-medium"
-            >
-              City
-            </label>
-            <input
-              id="city"
-              type="text"
-              className="px-3 text-[14px] font-semibold"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1 add-input">
-            <label
-              htmlFor="country"
-              className="text-[var(--color-main)] text-[12px] font-medium"
-            >
-              Country
-            </label>
-            <input
-              id="country"
-              type="text"
-              className="px-3 text-[14px] font-semibold"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1 add-input">
-            <label
-              htmlFor="number"
-              className="text-[var(--color-main)] text-[12px] font-medium"
-            >
-              Phone Number
-            </label>
-            <input
-              id="number"
-              type="text"
-              className="px-3 text-[14px] font-semibold"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-1 add-input">
-          <label
-            htmlFor="email"
-            className="text-[var(--color-main)] text-[12px] font-medium"
-          >
-            Contact Email
-          </label>
-          <input
-            id="email"
-            type="text"
-            className="px-3 text-[14px] font-semibold"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-      </div>
-
-      <div className="flex justify-center items-center gap-8">
-        <button className="py-[5px] px-[10px] text-[14px] font-semibold bg-[var(--color-main)] text-white  rounded-[6px] cursor-pointer">
-          Add Patient
-        </button>
-
-        <button
-          className="py-[5px] px-[10px] text-[14px] font-semibold bg-[#d9d9d9] text-white  rounded-[6px] cursor-pointer"
-          onClick={onHideAddPatient}
-        >
-          Close
-        </button>
-      </div>
-    </form>
-  );
-};
-
-const PatientInfoSearchForm = ({ onHideSearchPatient }) => {
-  const [search, setSearch] = useState("");
-  const [singlePatient, setSinglePatient] = useState(null);
-  const { patients } = usePatients();
-
-  const [error, setError] = useState(false);
-
-  const handleSearh = (e) => {
-    e.preventDefault();
-
-    const searchedPatient = patients.find(
-      (patient) =>
-        patient.id === search ||
-        patient.firstName.toLowerCase() === search.toLowerCase() ||
-        patient.lastName.toLowerCase() === search ||
-        patient.number === search
-    );
-
-    if (!searchedPatient) {
-      setError(true);
-      return;
+    if (editingId) {
+      setPatients(
+        patients.map((p) =>
+          p.id === editingId
+            ? { ...form, id: editingId, patientNumber: p.patientNumber }
+            : p
+        )
+      );
+      setEditingId(null);
+    } else {
+      const newPatient = {
+        ...form,
+        id: Date.now(),
+        patientNumber: generatePatientNumber()
+      };
+      setPatients([...patients, newPatient]);
     }
 
-    setError(false);
-
-    setSinglePatient(searchedPatient);
-    setSearch("");
+    // Reset form
+    setForm({
+      firstName: "",
+      lastName: "",
+      streetAddress: "",
+      city: "",
+      state: "",
+      country: "",
+      phoneNumber: "",
+      contactEmail: "",
+      status: defaultStatus.label
+    });
+    setErrors({});
   };
-  return (
-    <>
-      {!singlePatient && (
-        <form className="bg-white w-[500px] max-sm:w-[290px] px-6 py-4 m-auto flex flex-col items-center max-sm:items-stretch gap-6 add-patient-form">
-          <div className="flex flex-col gap-2.5">
-            <div className="flex flex-col gap-1 search-input">
-              <label className="text-[var(--color-main)] font-medium text-[12px]">
-                Search Patient By ID, First Name, Last Name, Phone Number
-              </label>
 
-              <input
-                id="id"
-                type="text"
-                className={`px-3 text-[14px] font-semibold search-patient ${
-                  error ? "error-msg" : ""
-                }`}
-                placeholder="ID or Name or Number"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
+  const handleEdit = (patient) => {
+    setForm({
+      firstName: patient.firstName,
+      lastName: patient.lastName,
+      streetAddress: patient.streetAddress,
+      city: patient.city,
+      state: patient.state,
+      country: patient.country,
+      phoneNumber: patient.phoneNumber,
+      contactEmail: patient.contactEmail,
+      status: patient.status
+    });
+    setEditingId(patient.id);
+    setErrors({});
+  };
+
+  const handleDelete = (id) => {
+    setPatients((prev) => prev.filter((p) => p.id !== id));
+  };
+
+  return (
+    <div className="min-h-screen px-3 lg:px-0">
+      <div className="max-w-3xl mx-auto mt-5">
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+          <div className="text-center mb-4">
+            <h1 className="text-2xl font-bold text-[#0069AB] mb-3 leading-relaxed">
+              Patient Information
+            </h1>
+            <p className="text-gray-600 text-md mb-4 text-center leading-relaxed">
+              {patients.length === 0
+                ? "No patients have been added yet. Use the form below to get started"
+                : `${patients.length} patient${
+                    patients.length !== 1 ? "s" : ""
+                  } in the system`}
+            </p>
+          </div>
+
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="Enter first name"
+                  value={form.firstName}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-2 focus:border-transparent focus:ring-[#0069AB] outline-none transition-all`}
+                />
+                {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Enter last name"
+                  value={form.lastName}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${errors.lastName ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-2 focus:border-transparent focus:ring-[#0069AB] outline-none transition-all`}
+                />
+                {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
+              </div>
             </div>
 
-            {error && (
-              <span className="text-red-600 font-bold text-xs">
-                No patient record found
-              </span>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Street Address
+              </label>
+              <input
+                type="text"
+                name="streetAddress"
+                placeholder="Enter street address"
+                value={form.streetAddress}
+                onChange={handleChange}
+                className={`w-full px-3 py-2 border ${errors.streetAddress ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-2 focus:border-transparent focus:ring-[#0069AB] outline-none transition-all`}
+              />
+              {errors.streetAddress && <p className="text-red-500 text-xs mt-1">{errors.streetAddress}</p>}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  State
+                </label>
+                <input
+                  type="text"
+                  name="state"
+                  placeholder="Enter state"
+                  value={form.state}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${errors.state ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-2 focus:border-transparent focus:ring-[#0069AB] outline-none transition-all`}
+                />
+                {errors.state && <p className="text-red-500 text-xs mt-1">{errors.state}</p>}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  City
+                </label>
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="Enter city"
+                  value={form.city}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${errors.city ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-2 focus:border-transparent focus:ring-[#0069AB] outline-none transition-all`}
+                />
+                {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city}</p>}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Country
+                </label>
+                <input
+                  type="text"
+                  name="country"
+                  placeholder="Enter country"
+                  value={form.country}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${errors.country ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-2 focus:border-transparent focus:ring-[#0069AB] outline-none transition-all`}
+                />
+                {errors.country && <p className="text-red-500 text-xs mt-1">{errors.country}</p>}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  placeholder="Enter phone number"
+                  value={form.phoneNumber}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-2 focus:border-transparent focus:ring-[#0069AB] outline-none transition-all`}
+                />
+                {errors.phoneNumber && <p className="text-red-500 text-xs mt-1">{errors.phoneNumber}</p>}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Contact Email
+              </label>
+              <input
+                type="email"
+                name="contactEmail"
+                placeholder="Enter contact email"
+                value={form.contactEmail}
+                onChange={handleChange}
+                className={`w-full px-3 py-2 border ${errors.contactEmail ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-2 focus:border-transparent focus:ring-[#0069AB] outline-none transition-all`}
+              />
+              {errors.contactEmail && <p className="text-red-500 text-xs mt-1">{errors.contactEmail}</p>}
+            </div>
+
+            <button
+              type="submit"
+              className="bg-[#0069AB] hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md"
+            >
+              {editingId ? "Update Patient" : "Add Patient"}
+            </button>
+            {editingId && (
+              <button
+                type="button"
+                onClick={() => {
+                  setEditingId(null);
+                  setForm({
+                    firstName: "",
+                    lastName: "",
+                    streetAddress: "",
+                    city: "",
+                    state: "",
+                    country: "",
+                    phoneNumber: "",
+                    contactEmail: "",
+                    status: defaultStatus.label
+                  });
+                  setErrors({});
+                }}
+                className="ml-3 bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-6 rounded-md"
+              >
+                Cancel
+              </button>
             )}
-          </div>
+          </form>
+        </div>
 
-          <div className="flex justify-center items-center gap-8">
-            <button
-              onClick={handleSearh}
-              className="py-[5px] px-[10px] text-[14px] font-semibold bg-[var(--color-main)] text-white  rounded-[6px] cursor-pointer"
-            >
-              Search Patient
-            </button>
-
-            <button
-              className="py-[5px] px-[10px] text-[14px] font-semibold bg-[#d9d9d9] text-white  rounded-[6px] cursor-pointer"
-              onClick={onHideSearchPatient}
-            >
-              Close
-            </button>
+        {patients.length > 0 && (
+          <div className="space-y-3 mb-5">
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+              Patient List
+            </h3>
+            {patients.map((patient) => (
+              <div
+                key={patient.id}
+                className="bg-white rounded-lg shadow-sm p-4 border border-gray-200"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">
+                      {patient.firstName} {patient.lastName}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      ID: {patient.patientNumber} | Status: {patient.status}
+                    </p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleEdit(patient)}
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(patient.id)}
+                      className="text-red-600 hover:text-red-800 text-sm font-medium"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </form>
-      )}
-
-      {singlePatient && (
-        <>
-          <div className="flex flex-col items-center justify-center gap-8">
-            <Card patient={singlePatient} />
-            <button
-              className="cursor-pointer bg-[var(--color-main)] font-semibold text-[14px] text-white p-2 rounded-[8px]"
-              onClick={() => setSinglePatient(null)}
-            >
-              Search Again
-            </button>
-          </div>
-        </>
-      )}
-    </>
+        )}
+      </div>
+    </div>
   );
-};
-
-const Button = ({ children, secondary, onClick, ...props }) => {
-  const btnClass = secondary
-    ? "patient-btn patient-btn--secondary"
-    : "patient-btn";
-  return (
-    <button
-      className={`text-[14px] cursor-pointer font-semibold ${btnClass}`}
-      {...props}
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  );
-};
+}
 
 export default PatientInfo;

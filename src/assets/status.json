@@ -1,0 +1,44 @@
+[
+  {
+    "id": "checked-in",
+    "label": "Checked-In",
+    "description": "In the facility awaiting their procedure.",
+    "color": "bg-[#3B82F6]"
+  },
+  {
+    "id": "pre-procedure",
+    "label": "Pre-Procedure",
+    "description": "Undergoing surgical preparation.",
+    "color": "bg-[#06B6D4]"
+  },
+  {
+    "id": "in-progress",
+    "label": "In-Progress",
+    "description": "Surgical procedure is underway.",
+    "color": "bg-[#F59E0B]"
+  },
+  {
+    "id": "closing",
+    "label": "Closing",
+    "description": "Surgery completed.",
+    "color": "bg-[#8B5CF6]"
+  },
+  {
+    "id": "recovery",
+    "label": "Recovery",
+    "description": "Patient transferred to post-surgery recovery room.",
+    "color": "bg-[#22C55E]"
+  },
+  {
+    "id": "complete",
+    "label": "Complete",
+    "description": "Recovery completed. Patient awaiting dismissal.",
+    "color": "bg-[#4B5563]"
+  },
+  {
+    "id": "dismissal",
+    "label": "Dismissal",
+    "description": "Transferred to a hospital room or outpatient has left the hospital.",
+    "color": "bg-[#DC2626]"
+  }
+]

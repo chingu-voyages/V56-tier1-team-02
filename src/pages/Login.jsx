@@ -12,7 +12,7 @@ import {
 import { UserContext } from '../components/UserContext';
 
 function Login() {
-  const { setRole } = useContext(UserContext);
+  const { setRole, setName } = useContext(UserContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,7 +26,6 @@ function Login() {
   const navigate = useNavigate();
 
   const handleGuestAccess = () => {
-    setRole('');
     navigate('/patient-status');
   };
 
@@ -69,9 +68,12 @@ function Login() {
 
     if (user) {
       setRole(user.role);
+      setName(user.name);
       setMessage(`Welcome back, ${user.name}! Redirecting...`);
       setMessageType('success');
-      
+      localStorage.setItem('role', user.role);
+      localStorage.setItem('name', user.name); // ✅ save name
+
       sessionStorage.setItem('surgeryBoardUser', JSON.stringify({
         email: user.email,
         role: user.role,
