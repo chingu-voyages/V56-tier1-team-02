@@ -3,7 +3,7 @@ export const credentials = [
     email: 'admin@hospital.com',
     password: 'admin@123',
     role: 'admin',
-    name: 'System Administrator'
+    name: 'Dr. Nelson'
     },
   {
     email: 'surgeon1@hospital.com',

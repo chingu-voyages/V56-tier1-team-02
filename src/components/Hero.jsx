@@ -5,16 +5,8 @@ import { UserContext } from '../components/UserContext';
 import { useContext } from 'react';
 
 function Hero() {
-    const { role } = useContext(UserContext);
+  const { role } = useContext(UserContext);
 
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [message, setMessage] = useState("");
-  useEffect(() => {
-    if (role) {
-      setIsDisabled(true); // Disable login form
-      setMessage("You're already signed in as " + role);
-    }
-  }, [role]);
   const navigate = useNavigate();
     
       const handleGuest = () => {
@@ -38,10 +30,11 @@ function Hero() {
         <p className="md:text-lg text-md text-gray-600 mb-8 max-w-2xl mx-auto p-4">
           Real-time updates on patient surgery status. Know exactly where your loved one is in the process — from check-in to recovery.
         </p>
+        {!role && (
         <div className="flex flex-col md:flex-row justify-center gap-4">
           <Link
-            to="/login" onClick={handleLogin} disabled={isDisabled}
-            className={`bg-blue-700 text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-blue-800 transition ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            to="/login" onClick={handleLogin}
+            className="bg-blue-700 text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-blue-800 transition "
           >
             🔐 Login
           </Link>
@@ -51,10 +44,9 @@ function Hero() {
           >
             👤 Continue as Guest
           </Link>
-          {message && (
-  <p className="text-red-500 text-sm mt-2">{message}</p>
-)}
+         
         </div>
+        )}
       </section>
       
   )
