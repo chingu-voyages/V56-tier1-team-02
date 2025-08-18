@@ -77,6 +77,21 @@ LIVE LINK : [Surgery Status Board](http://surgery-status-board.netlify.app/)
 6. **Complete** – Recovery completed, awaiting dismissal  
 7. **Dismissal** – Transferred to hospital room or discharged  
 
+
+## Login Credentials
+Since this is a frontend-only demo, the following credentials are hardcoded:
+
+- **Admin:**  
+  Email: admin@hospital.com\
+  Password: admin@123
+
+- **Surgical Team:**  
+  Email: surgeon1@hospital.com\
+  Password: surgery123
+
+- **Guest:**  
+  No login required
+
 ---
 
 ## 💻 Getting Started
