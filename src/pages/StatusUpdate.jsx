@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { usePatients } from "../context/PatientsContext";
-import statuses from "../assets/status.json";
-import { LuSearch } from "react-icons/lu";
+import { useState, useEffect} from 'react'
+import {usePatients} from "../context/PatientsContext"
+import statuses from "../assets/status.json"
+import {LuSearch} from "react-icons/lu"
 
 function StatusUpdate() {
+
   const { patients, setPatients } = usePatients();
   const [patientNumber, setPatientNumber] = useState("");
   const [selectedPatient, setSelectedPatient] = useState(null);
@@ -44,6 +45,7 @@ function StatusUpdate() {
     );
     setSelectedPatient(updatedPatient);
   };
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-start p-4">
@@ -121,7 +123,7 @@ function StatusUpdate() {
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default StatusUpdate;
+export default StatusUpdate

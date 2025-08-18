@@ -1,6 +1,3 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../components/UserContext";
 import Hero from "../components/Hero";
 import WhyItMatters from "../components/WhyItMatters";
 import HowItWorks from "../components/HowItWorks";

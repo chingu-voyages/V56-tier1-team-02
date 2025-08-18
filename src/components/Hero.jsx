@@ -1,25 +1,21 @@
-import React from 'react'
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../components/UserContext';
-import { useContext } from 'react';
+import { use, useContext } from 'react'
+
 
 function Hero() {
-  const { role } = useContext(UserContext);
 
-  const navigate = useNavigate();
-    
-      const handleGuest = () => {
-        navigate('/patient-status');
-      };
-    
-      const handleLogin = () => {
-        navigate("/login"); // Goes to login page to set role as admin/surgical
-      };
-    
+  const { role } = useContext(UserContext);
+  const navigate = useNavigate()
+  const handleGuest = () => {
+    navigate("/patient-status")
+  }  
+  const handleLogin = () => {
+    navigate("/login")
+  }
+
   return (
-     
-      <section className="px-2 text-center flex flex-col items-center justify-center min-h-screen">
+       <section className="px-2 text-center flex flex-col items-center justify-center min-h-screen">
         <h1 className="md:text-5xl text-3xl font-bold text-[#0069AB] mb-4">
                 Stay&nbsp;
                 <span className="relative before:absolute before:content-[''] before:h-[0.2em] before:w-[85%] before:bottom-[0.1em]  before:-z-10 before:bg-[#FFE299]">Informed</span>.
@@ -48,8 +44,8 @@ function Hero() {
         </div>
         )}
       </section>
-      
   )
 }
 
 export default Hero
+

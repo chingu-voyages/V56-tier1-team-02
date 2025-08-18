@@ -1,13 +1,13 @@
-import React from 'react'
-import { useState } from 'react';
+import { useState } from "react"
+
 
 function FAQ() {
-    const [openFaq, setOpenFaq] = useState(null);
-    const toggleFaq = (faqId) => {
-      setOpenFaq(openFaq === faqId ? null : faqId);
-    };
-   // FAQ data
-    const faqs = [
+  const [openFaq, setOpenFaq] = useState(null)
+  const toggleFaq = (faqId) => {
+    setOpenFaq(openFaq === faqId ? null : faqId)
+  }
+  // Famous Asked Questions data
+  const faqs = [
     {
       id: 1,
       icon: '🔐',
@@ -40,9 +40,10 @@ function FAQ() {
       bgColor: 'from-purple-50 to-violet-50',
       iconColor: 'text-purple-600'
     }
-  ];
+  ]
+
   return (
-        <section className="py-20 bg-gradient-to-b from-white/80 to-gray-50/90">
+    <section className="py-20 bg-gradient-to-b from-white/80 to-gray-50/90">
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-[#0069AB] mb-4">Frequently Asked Questions</h2>

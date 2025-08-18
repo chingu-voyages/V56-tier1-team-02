@@ -1,9 +1,9 @@
-import React from "react";
-
 import statuses from "../assets/status.json"
 
-export function Card({ patient }) {
+export function Card({patient}) {
+
   const statusColor = statuses.find(s => s.label === patient.status).color
+
   return (
     <li className="bg-white card rounded-2xl flex justify-center items-center  gap-3 px-[25px] max-sm:px-[20px]">
       <div className="flex flex-col justify-center gap-5">
@@ -30,5 +30,7 @@ export function Card({ patient }) {
         </div>
       </div>
     </li>
-  );
+  )
 }
+
+

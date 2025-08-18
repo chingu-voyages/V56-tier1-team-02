@@ -1,33 +1,37 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate} from 'react-router-dom'
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
-import { useNavigate } from "react-router-dom";
 
-const ProtectedRoute = ({ children, allowedRoles }) => {
-  const navigate = useNavigate();
-  const { role, setRole, setName, loading } = useContext(UserContext);
+import React from 'react'
+
+const ProtectedRoute = ({ children, allowedRoles}) => {
+  const navigate = useNavigate()
+  const { role, setRole, setName, loading} = useContext(UserContext)
+
   const handleLogout = () => {
-    localStorage.removeItem('role');
-    localStorage.removeItem('name');
-    setRole(null);
-    setName(null);
-    navigate('/login');
-  };
-  if (loading) {
-    return <div>Loading...</div>; // ⏳ Wait until localStorage check finishes
+    localStorage.removeItem('role')
+    localStorage.removeItem('name')
+    setRole(null)
+    setName(null)
+    navigate('/login')
   }
 
-  // Not logged in at all
-  if (!role) {
+  //wait until checks finishes
+  if(loading) {
+    return <div>...Loading</div>
+  }
+
+  // if not logged in at all
+  if(!role) {
     return <Navigate to="/login" replace />;
   }
 
-  // Logged in but wrong role
-  if (allowedRoles && !allowedRoles.includes(role)) {
-    return  <div className="min-h-screen flex items-center justify-center p-4">
+  //logged in but wrong role
+  if(allowedRoles && !allowedRoles.includes(role)) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-          {/* Error Icon */}
           <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-6">
             <svg
               className="h-8 w-8 text-red-600"
@@ -43,20 +47,14 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
               />
             </svg>
           </div>
-
-          {/* Title */}
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
             Access Denied
           </h1>
-
-          {/* Description */}
           <div className="space-y-3 mb-6">
             <p className="text-gray-600">
               You don't have permission to access this page.
             </p>
           </div>
-
-          {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={() => window.history.back()}
@@ -75,8 +73,6 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
               Switch Account
             </button>
           </div>
-
-          {/* Support Info */}
           <div className="mt-8 pt-6 border-t border-gray-200">
             <p className="text-xs text-gray-500">
               Need access? Contact your system administrator or IT support.
@@ -85,11 +81,14 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
         </div>
       </div>
     </div>
-
+    )
   }
+  
+  //allowed
+  return children
+}
 
-  // Allowed
-  return children;
-};
+export default ProtectedRoute
 
-export default ProtectedRoute;
+
+

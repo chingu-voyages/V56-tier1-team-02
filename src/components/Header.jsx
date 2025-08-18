@@ -1,13 +1,16 @@
-// src/components/Header.jsx
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { UserContext } from './UserContext';
-import logo from '../assets/logo-ssb.png';
+import logo from '../assets/logo-ssb.png'
+
+
+import React from 'react'
 
 function Header() {
-  const { role, setRole, name, setName } = useContext(UserContext);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
+
+  const { role, setRole, name, setName } = useContext(UserContext)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     localStorage.removeItem('role');
@@ -17,12 +20,6 @@ function Header() {
     navigate('/');
   };
 
-  const linkClasses = ({ isActive }) =>
-    `block transition-all text-sm leading-6 tracking-wide w-fit ${
-      isActive
-        ? 'border-b-2 border-[#0069AB] font-bold'
-        : 'text-[#0069AB]  hover:font-bold'
-    }`;
 
   const date = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
@@ -30,12 +27,19 @@ function Header() {
     day: 'numeric',
   });
 
+  const linkClasses = ({ isActive }) =>
+    `block transition-all text-sm leading-6 tracking-wide w-fit ${
+      isActive
+        ? 'border-b-2 border-[#0069AB] font-bold'
+        : 'text-[#0069AB]  hover:font-bold'
+    }`;
+
   return (
-    <header className="bg-white/50 border-b border-gray-100 sticky top-0 z-40 backdrop-blur-sm text-[#0069AB]">
+     <header className="bg-white/50 border-b border-gray-100 sticky top-0 z-40 backdrop-blur-sm text-[#0069AB]">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 lg:px-2">
         <div className="flex justify-between items-center gap-4 lg:gap-2">
          <div className="flex flex-col md:flex-row items-center w-full justify-between gap-4 ">
-          {/* Logo + Title */}
+          {/* logo + title */}
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => navigate('/')}
@@ -46,7 +50,7 @@ function Header() {
             </h1>
           </div>
 
-          {/* Desktop Nav */}
+          {/* desktop nav */}
           <nav className="hidden lg:flex gap-10">
             <NavLink to="/" className={linkClasses}>Home</NavLink>
             <NavLink to="/info" className={linkClasses}>Patient Information</NavLink>
@@ -55,11 +59,11 @@ function Header() {
           
           </nav>
 
-          {/* Date */}
+          {/* date */}
           <div className="text-sm text-gray-500 pl-10 md:pl-0">{date}</div>
           </div>
           <div className="hidden lg:flex justify-between items-center w-fit text-gray-500">
-            {/* User Info + Logout */}
+            {/* user info + logout btn */}
             {role && (
               <div className="flex items-center gap-0 pl-8">
                 <div className="text-sm text-gray-500">
@@ -76,7 +80,7 @@ function Header() {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* mobile menu button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="lg:hidden focus:outline-none self-center pb-6 md:pb-0"
@@ -107,7 +111,7 @@ function Header() {
           
         </div>
 
-        {/* Mobile Menu */}
+        {/* mobile menu */}
         {menuOpen && (
           <nav className="lg:hidden mt-4 flex flex-col gap-6 items-center pt-4">
             <NavLink to="/" className={linkClasses} onClick={() => setMenuOpen(false)}>Home</NavLink>
@@ -120,7 +124,6 @@ function Header() {
               {name && <span className="font-bold ">{name}</span>}
               <span className="italic">({role})</span>
             </div>
-            
               <button
                 onClick={() => {
                   handleLogout();
@@ -136,7 +139,9 @@ function Header() {
         )}
       </div>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header
+
+

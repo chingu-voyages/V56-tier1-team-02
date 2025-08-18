@@ -1,27 +1,24 @@
-import React from 'react'
-import { FaGithub } from "react-icons/fa6";
-import { FaHeartbeat, FaShieldAlt,  } from "react-icons/fa"
-import logo from '../assets/logo-ssb.png'; 
+import { FaGithub } from 'react-icons/fa6';
+import { FaHeartbeat, FaShieldAlt } from 'react-icons/fa';
+import logo from '../assets/logo-ssb.png'
 import { useNavigate } from 'react-router-dom';
 
-
+import React from 'react'
 
 function Footer() {
-  const navigate = useNavigate();
+
+  const navigate = useNavigate()
+
   return (
     <footer className="bg-gradient-to-b from-white/80 to-gray-50/90 border-t border-gray-200 py-10">
       <div className="max-w-6xl mx-auto px-6">
-        
-        {/* Main Content - Centered */}
         <div className="flex flex-col items-center justify-center text-center space-y-6">
-          
-          {/* Header with Medical Icon */}
+          {/* header with logo */}
           <div className="flex items-center md:gap-2 gap-0 cursor-pointer" onClick={()=>navigate("/")}>
             <img src={logo} alt="Logo" className="w-15 h-14 text-center" />
             <h3 className="font-semibold text-[#0069AB] text-lg m-0 p-0">Surgery Status Board</h3>
           </div>
-          
-          {/* Development Team Section */}
+          {/* development team */}
           <div className="max-w-md">
             <p className="text-gray-500 text-sm mb-4">Developed by IT Team</p>
             <div className="space-y-3">
@@ -31,7 +28,7 @@ function Footer() {
                 rel="noopener noreferrer"
                 className="block text-[#0069AB] hover:text-blue-700 transition-colors duration-200 hover:underline text-sm font-medium"
               >
-                Josh - Web Developer
+                Josh - Frontend Developer
               </a>
               <a
                 href="https://github.com/ouassimaelyakoubi"
@@ -51,8 +48,7 @@ function Footer() {
               </a>
             </div>
           </div>
-
-          {/* GitHub Repository */}
+          {/* github repository link */}
           <a
             href="https://github.com/chingu-voyages/V56-tier1-team-02"
             target="_blank"
@@ -62,8 +58,6 @@ function Footer() {
             <FaGithub className="text-lg group-hover:scale-110 transition-transform duration-200" />
             <span className="text-sm font-medium">View Source Code</span>
           </a>
-
-          {/* Security & Status Indicators */}
           <div className="flex flex-col sm:flex-row items-center gap-6 text-xs text-gray-600 mt-8">
             <div className="flex items-center gap-2">
               <FaShieldAlt className="text-green-500" />
@@ -79,8 +73,7 @@ function Footer() {
             </div>
           </div>
         </div>
-
-        {/* Bottom Section */}
+      {/* bottom section */}
         <div className="border-t border-gray-200 mt-10 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
             <div className="flex flex-col sm:flex-row items-center gap-4 text-xs text-gray-500">
@@ -98,3 +91,4 @@ function Footer() {
 }
 
 export default Footer
+

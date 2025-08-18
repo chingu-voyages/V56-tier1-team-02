@@ -1,7 +1,7 @@
 import React from 'react'
 
 function HowItWorks() {
-  // Workflow steps
+
   const steps = [
     {
       number: 1,
@@ -18,9 +18,10 @@ function HowItWorks() {
       title: 'Stay Updated',
       description: 'Get instant updates when the surgery is complete or when the patient is moved to recovery. No need to wait for phone calls — the board keeps everyone informed.'
     }
-  ];
+  ]
+
   return (
-     <section className="py-20 bg-gradient-to-b from-white/80 to-gray-50/90" id='HowItWorks'>
+    <section className="py-20 bg-gradient-to-b from-white/80 to-gray-50/90" id='HowItWorks'>
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-[#0069AB] mb-4">How It Works</h2>
@@ -49,3 +50,4 @@ function HowItWorks() {
 }
 
 export default HowItWorks
+

@@ -1,9 +1,8 @@
+
 import React from 'react'
-import { useState, useEffect } from 'react';
 
 function WhyItMatters() {
-  // Features data
-  const features = [
+  const features =[
     {
       icon: '💗',
       title: 'Reduces Anxiety',
@@ -32,24 +31,14 @@ function WhyItMatters() {
       bgColor: 'from-green-50 to-emerald-50',
       iconColor: 'text-green-600'
     },
-    {
-      icon: '🤖',
-      title: 'Optional AI Chat Support',
-      description: 'Need help understanding the process or have a question? Use the built-in chatbot to get instant answers—no need to track down busy personnel.',
-      bgColor: 'from-yellow-50 to-amber-50',
-      iconColor: 'text-yellow-600'
-    }
-  ];
-     
- 
+  ]
   return (
-    <section className="py-20 bg-gradient-to-b from-white/80 to-gray-50/90">
+      <section className="py-20 bg-gradient-to-b from-white/80 to-gray-50/90">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-[#0069AB] mb-4">Why This Matters</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">Surgery is stressful. We make it clearer.</p>
         </div>
-            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((feature, index) => (
                 <article 
@@ -75,3 +64,6 @@ function WhyItMatters() {
 }
 
 export default WhyItMatters
+
+
+     

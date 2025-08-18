@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { credentials } from '../data';
+import { useState, useContext} from "react"
+import { useNavigate} from 'react-router-dom'
+import { credentials} from '../data'
 import {
   LuEye,
   LuEyeOff,
@@ -8,7 +8,7 @@ import {
   LuCircleCheck,
   LuLock,
   LuMail,
-} from 'react-icons/lu';
+} from 'react-icons/lu'
 import { UserContext } from '../components/UserContext';
 
 function Login() {
@@ -51,7 +51,8 @@ function Login() {
     return isValid;
   };
 
-  const handleSubmit = async (e) => {
+
+    const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -95,8 +96,9 @@ function Login() {
     setIsLoading(false);
   };
 
+
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="min-h-screen flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md border border-gray-100">
         
         {/* Header */}
@@ -209,7 +211,8 @@ function Login() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login
+

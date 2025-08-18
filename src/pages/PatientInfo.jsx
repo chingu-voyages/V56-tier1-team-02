@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
-import { usePatients } from "../context/PatientsContext"; // adjust the path
-import statuses from '../assets/status.json';
+import React, { useState } from "react"
+import { usePatients } from "../context/PatientsContext"
+import statuses from "../assets/status.json"
 
 function PatientInfo() {
   const { patients, setPatients } = usePatients();
@@ -109,7 +109,6 @@ function PatientInfo() {
   const handleDelete = (id) => {
     setPatients((prev) => prev.filter((p) => p.id !== id));
   };
-
   return (
     <div className="min-h-screen px-3 lg:px-0">
       <div className="max-w-3xl mx-auto mt-5">
@@ -323,7 +322,7 @@ function PatientInfo() {
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default PatientInfo;
+export default PatientInfo

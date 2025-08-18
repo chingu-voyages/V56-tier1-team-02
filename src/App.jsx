@@ -1,25 +1,19 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { Routes, Route, BrowserRouter as Router} from 'react-router-dom'
-import Home from './pages/Home'
-import PatientStatus from './pages/PatientStatus'
-import PatientInfo from './pages/PatientInfo'
-import StatusUpdate from './pages/StatusUpdate'
-import Login from './pages/Login'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import ProtectedRoute from "./components/ProtectedRoute";
-import NotFound from "./pages/NotFound";
+import {Routes, Route, BrowserRouter as Router} from "react-router-dom"
+import Home from "./pages/Home.jsx"
+import PatientStatus from "./pages/PatientStatus.jsx"
+import PatientInfo from "./pages/PatientInfo.jsx"
+import StatusUpdate from "./pages/StatusUpdate.jsx"
+import Login from "./pages/Login.jsx"
+import Footer from "./components/Footer.jsx"
+import Header from "./components/Header.jsx"
+import ProtectedRoute from "./components/ProtectedRoute.jsx"
+import NotFound from './pages/NotFound'
 
-
+import React from 'react'
 
 function App() {
-   
   return (
     <Router>
-
-     
       <Header/>
           <main>
             <Routes>
@@ -42,11 +36,12 @@ function App() {
                   <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
-
       <Footer/> 
-
     </Router>
   )
 }
 
 export default App
+
+
+

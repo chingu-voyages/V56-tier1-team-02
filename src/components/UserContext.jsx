@@ -1,30 +1,32 @@
-// src/context/UserContext.jsx
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect} from 'react'
 
 export const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
-  const [role, setRole] = useState(null);
-  const [name, setName] = useState(null);
-  const [loading, setLoading] = useState(true); // ✅
+export const UserProvider = ({children}) => {
+  const [role, setRole] = useState(null)
+  const [name, setName] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const storedRole = localStorage.getItem('role');
-    const storedName = localStorage.getItem('name');
+    const storedRole = localStorage.getItem('role')
+    const storedName = localStorage.getItem('name')
 
     if (storedRole) {
-      setRole(storedRole);
+      setRole(storedRole)
     }
-    if (storedName) {
-      setName(storedName);
+    if(storedName) {
+      setName(storedName)
     }
-    setLoading(false);
-  }, []);
+    setLoading(false)
+  },[])
 
-  return (
+  return(
     <UserContext.Provider value={{ role, setRole, name, setName, loading }}>
       {children}
     </UserContext.Provider>
-  );
-};
-export default UserProvider;
+  )
+}
+
+export default UserProvider
+
+
